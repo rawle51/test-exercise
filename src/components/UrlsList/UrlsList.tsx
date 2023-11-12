@@ -22,7 +22,10 @@ export const UrlsList = () => {
     loading,
     error,
     responseData,
-  } = useFetch<string, UrlItem[]>({ url: '/urls', method: 'GET' });
+  } = useFetch<string, UrlItem[]>({
+    url: '/urls',
+    method: 'GET',
+  });
 
   const [state, setState] = useState(responseData);
 
@@ -33,7 +36,9 @@ export const UrlsList = () => {
 
   const handleDelete = async (id: string) => {
     setState((prevState) => {
-      const newState = prevState ? prevState?.filter((item) => item.id !== id) : null;
+      const newState = prevState
+        ? prevState?.filter((item) => item.id !== id)
+        : null;
 
       return newState;
     });
@@ -53,7 +58,10 @@ export const UrlsList = () => {
     <StyledContainer>
       <Header cleanup={() => setState(null)} />
 
-      <StyledButton onClick={() => navidate(RoutePath.createUrl)} variant="button">
+      <StyledButton
+        onClick={() => navidate(RoutePath.createUrl)}
+        variant="button"
+      >
         <Typography variant="body2">Create new url</Typography>
       </StyledButton>
 

@@ -3,7 +3,12 @@ import { LoadingButton } from '@mui/lab';
 import { TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { StyledContainer, StyledError, StyledForm, StyledIcon } from './Login.styled';
+import {
+  StyledContainer,
+  StyledError,
+  StyledForm,
+  StyledIcon,
+} from './Login.styled';
 import { RoutePath } from '../../services/navigation.service';
 import { useFetch } from '../../services/requestor.service';
 

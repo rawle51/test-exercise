@@ -14,7 +14,9 @@ export function server() {
 
       // '/login'
       this.post('/login', (_, request) => {
-        const requestBody = JSON.parse(JSON.parse(request.requestBody)) as LoginRequest;
+        const requestBody = JSON.parse(
+          JSON.parse(request.requestBody),
+        ) as LoginRequest;
         if (isValidLogin(requestBody)) {
           const token = 'mock-token';
 
@@ -63,8 +65,16 @@ export function server() {
         }
 
         return [
-          { id: '1', shortUrl: '/mock-url-1', fullUrl: 'https://mocksite.com/page1' },
-          { id: '2', shortUrl: '/mock-url-2', fullUrl: 'https://mocksite.com/page2' },
+          {
+            id: '1',
+            shortUrl: '/mock-url-1',
+            fullUrl: 'https://mocksite.com/page1',
+          },
+          {
+            id: '2',
+            shortUrl: '/mock-url-2',
+            fullUrl: 'https://mocksite.com/page2',
+          },
         ];
       });
 
@@ -80,5 +90,7 @@ export function server() {
 }
 
 function isValidLogin(loginRequest: LoginRequest): boolean {
-  return loginRequest.username === 'admin' && loginRequest.password === 'password';
+  return (
+    loginRequest.username === 'admin' && loginRequest.password === 'password'
+  );
 }

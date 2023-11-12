@@ -19,13 +19,14 @@ export const TinyUrl = () => {
   const [value, setValue] = useState('');
   const navigate = useNavigate();
 
-  const { fetchData, loading, error, responseData } =
-    useFetch<string, { data: UrlItem }>({
-      url: `/urls`,
-      method: 'POST',
-      data: value,
-    }
-  );
+  const { fetchData, loading, error, responseData } = useFetch<
+    string,
+    { data: UrlItem }
+  >({
+    url: `/urls`,
+    method: 'POST',
+    data: value,
+  });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

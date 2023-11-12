@@ -61,7 +61,12 @@ export const Login = () => {
           size="small"
           value={loginState.password}
         />
-        <LoadingButton variant="contained" type="submit" loading={loading}>
+        <LoadingButton
+          variant="contained"
+          type="submit"
+          loading={loading}
+          disabled={!(loginState.username && loginState.password)}
+        >
           Login
         </LoadingButton>
         <StyledError>

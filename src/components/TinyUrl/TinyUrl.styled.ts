@@ -39,3 +39,11 @@ export const StyledContent = styled.div`
 export const StyledFiled = styled(TextField)`
   width: 100%;
 `;
+
+export const StyledResult = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  cursor: pointer;
+`;

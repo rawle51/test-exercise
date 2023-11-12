@@ -52,8 +52,8 @@ export function server() {
             message: 'Created',
             data: {
               id: '1',
-              fullUrl: '12345',
-              shortUrl: '1234',
+              fullUrl: 'example-full-url.com',
+              shortUrl: 'example-short-url.com',
             },
           },
         );

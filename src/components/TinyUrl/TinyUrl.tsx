@@ -1,7 +1,9 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DoneIcon from '@mui/icons-material/Done';
 
 import {
   StyledContainer,
@@ -9,6 +11,7 @@ import {
   StyledFiled,
   StyledForm,
   StyledButton,
+  StyledResult,
 } from './TinyUrl.styled';
 import { useFetch } from '../../services/requestor.service';
 import { Header } from '../Header/Header';
@@ -17,6 +20,7 @@ import { UrlItem } from '../../services/sdk.service';
 
 export const TinyUrl = () => {
   const [value, setValue] = useState('');
+  const [copyState, setCopyState] = useState(false);
   const navigate = useNavigate();
 
   const { fetchData, loading, error, responseData } = useFetch<
@@ -39,6 +43,25 @@ export const TinyUrl = () => {
     setValue('');
   };
 
+  const copyText = (text: string) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopyState(true);
+      })
+      .catch((err) => {
+        console.error('Unable to copy:', err);
+      });
+  };
+
+  useEffect(() => {
+    if (copyState) {
+      let timerId = setTimeout(() => setCopyState(false), 2000);
+
+      return () => clearTimeout(timerId);
+    }
+  }, [copyState]);
+
   return (
     <StyledContainer>
       <Header />
@@ -54,13 +77,30 @@ export const TinyUrl = () => {
           onChange={handleInputChange}
           value={value}
         />
-        <LoadingButton loading={loading} type="submit" variant="contained">
+        <LoadingButton
+          loading={loading}
+          type="submit"
+          variant="contained"
+          disabled={!value}
+        >
           Submit
         </LoadingButton>
       </StyledForm>
 
       <StyledContent>
-        {responseData && <div>Short url: {responseData.data.id}</div>}
+        {responseData && (
+          <StyledResult onClick={() => copyText(responseData.data.shortUrl)}>
+            Short url: {responseData.data.shortUrl}
+            {copyState ? (
+              <>
+                <DoneIcon color="success" />
+                <Typography color="green">Copied</Typography>
+              </>
+            ) : (
+              <ContentCopyIcon />
+            )}
+          </StyledResult>
+        )}
         {error && (
           <Typography variant="caption" color="error">
             {error}

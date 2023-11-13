@@ -2,6 +2,7 @@ import { createServer, Response } from 'miragejs';
 import { LoginRequest } from './sdk.service';
 
 export const TOKEN_ITEM = 'token-item';
+export const EXAMPLE_URL = 'example.com';
 
 export function getAuthorized(): boolean {
   return Boolean(localStorage.getItem(TOKEN_ITEM));
@@ -87,14 +88,17 @@ export function server() {
       });
 
       this.get('/urls/:urlUuid', (_, request) => {
-        console.log(1);
         if (!getAuthorized()) {
           return new Response(401, {}, { error: 'Unauthorized' });
         }
 
         let id = request.params.urlUuid;
 
-        return new Response(200, {}, { data: 'short-url' });
+        if (id === '1') {
+          return new Response(200, {}, { data: 'short-url.com' });
+        }
+
+        return new Response(404, {}, { error: 'Not fount' });
       });
     },
   });

@@ -6,16 +6,24 @@ import { Form } from '../Form/Form';
 import { Header } from '../Header/Header';
 import { UrlItem } from '../../services/sdk.service';
 import { useFetch } from '../../services/requestor.service';
-import { StyledButton, StyledContainer } from './ShowUrl.styled';
+import { StyledButton, StyledContainer, StyledResult } from './ShowUrl.styled';
 
 import { RoutePath } from '../../services/navigation.service';
+import { EXAMPLE_URL } from '../../services/serverMock.service';
 
 export const ShowUrl = () => {
   const navidate = useNavigate();
   const [value, setValue] = useState('');
 
-  const { fetchData: getUrl, loading } = useFetch<string, { data: UrlItem }>({
-    url: `/urls/${1}`,
+  const requestValue = value === EXAMPLE_URL ? 1 : 2;
+
+  const {
+    fetchData: getUrl,
+    loading,
+    responseData,
+    error,
+  } = useFetch<string, { data: string }>({
+    url: `/urls/${requestValue}`,
     method: 'GET',
   });
 
@@ -46,6 +54,16 @@ export const ShowUrl = () => {
         loading={loading}
         buttonName="Get url"
       />
+      {responseData && !error && (
+        <StyledResult>
+          <Typography>{responseData.data}</Typography>
+        </StyledResult>
+      )}
+      {error && (
+        <StyledResult>
+          <Typography color="error">{error}</Typography>
+        </StyledResult>
+      )}
     </StyledContainer>
   );
 };

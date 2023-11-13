@@ -6,6 +6,7 @@ import { globalStyles, StyledContainer } from './App.styled';
 import { Login } from '../Login/Login';
 import { RoutePath } from '../../services/navigation.service';
 import { UrlsList } from '../UrlsList/UrlsList';
+import { ShowUrl } from '../ShowUrl/ShowUrl';
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
           <Route path={RoutePath.login} Component={Login} />
           <Route path={RoutePath.home} Component={UrlsList} />
           <Route path={RoutePath.createUrl} Component={TinyUrl} />
+          <Route path={RoutePath.showUrl} Component={ShowUrl} />
         </Routes>
       </BrowserRouter>
     </StyledContainer>

@@ -17,6 +17,7 @@ import { useFetch } from '../../services/requestor.service';
 import { Header } from '../Header/Header';
 import { RoutePath } from '../../services/navigation.service';
 import { UrlItem } from '../../services/sdk.service';
+import { Form } from '../Form/Form';
 
 export const TinyUrl = () => {
   const [value, setValue] = useState('');
@@ -70,22 +71,12 @@ export const TinyUrl = () => {
         <Typography variant="body2">View the urls list</Typography>
       </StyledButton>
 
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledFiled
-          variant="outlined"
-          size="small"
-          onChange={handleInputChange}
-          value={value}
-        />
-        <LoadingButton
-          loading={loading}
-          type="submit"
-          variant="contained"
-          disabled={!value}
-        >
-          Submit
-        </LoadingButton>
-      </StyledForm>
+      <Form
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+        value={value}
+        loading={loading}
+      />
 
       <StyledContent>
         {responseData && (

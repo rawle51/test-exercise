@@ -9,6 +9,7 @@ import {
   StyledItem,
   StyledDeleteIcon,
   StyledList,
+  StyledButtonWrapper,
 } from './UrlsList.styled';
 import { RoutePath } from '../../services/navigation.service';
 import { Typography } from '@mui/material';
@@ -30,7 +31,7 @@ export const UrlsList = () => {
   const [state, setState] = useState(responseData);
 
   const { fetchData: deleteUrl } = useFetch<string, UrlItem[]>({
-    url: '/urls/:urlUuid',
+    url: '/urls',
     method: 'DELETE',
   });
 
@@ -58,12 +59,20 @@ export const UrlsList = () => {
     <StyledContainer>
       <Header cleanup={() => setState(null)} />
 
-      <StyledButton
-        onClick={() => navidate(RoutePath.createUrl)}
-        variant="button"
-      >
-        <Typography variant="body2">Create new url</Typography>
-      </StyledButton>
+      <StyledButtonWrapper>
+        <StyledButton
+          onClick={() => navidate(RoutePath.createUrl)}
+          variant="button"
+        >
+          <Typography variant="body2">Create new url</Typography>
+        </StyledButton>
+        <StyledButton
+          onClick={() => navidate(RoutePath.showUrl)}
+          variant="button"
+        >
+          <Typography variant="body2">Find existing url</Typography>
+        </StyledButton>
+      </StyledButtonWrapper>
 
       {loading && (
         <Typography align="left" variant="body1">

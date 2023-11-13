@@ -15,6 +15,7 @@ export const useFetch = <T, U>({ url, method, data }: Params<T>) => {
     setLoading(true);
     setError(null);
     try {
+      console.log(1, url);
       const response = await fetch(url, {
         method: method,
         headers: {

@@ -11,6 +11,11 @@ export const StyledContainer = styled.div`
   box-sizing: border-box;
 `;
 
+export const StyledButtonWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
 export const StyledButton = styled(Link)`
   display: block;
   margin-bottom: 16px;
@@ -18,7 +23,7 @@ export const StyledButton = styled(Link)`
 `;
 
 export const StyledList = styled.ul`
-  margin: 0;
+  margin: 16px 0 0;
   padding: 0;
 `;
 

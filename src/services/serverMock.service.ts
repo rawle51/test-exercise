@@ -78,12 +78,23 @@ export function server() {
         ];
       });
 
-      this.delete('/urls/:urlUuid', () => {
+      this.delete('/urls', (_, request) => {
         if (!getAuthorized()) {
           return new Response(401, {}, { error: 'Unauthorized' });
         }
 
         return new Response(200, {}, { message: 'Deleted' });
+      });
+
+      this.get('/urls/:urlUuid', (_, request) => {
+        console.log(1);
+        if (!getAuthorized()) {
+          return new Response(401, {}, { error: 'Unauthorized' });
+        }
+
+        let id = request.params.urlUuid;
+
+        return new Response(200, {}, { data: 'short-url' });
       });
     },
   });

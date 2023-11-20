@@ -16,7 +16,7 @@ export const useFetch = <T, U>({ url, method, data }: Params<T>) => {
     setError(null);
     try {
       const response = await fetch(url, {
-        method: method,
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -30,8 +30,8 @@ export const useFetch = <T, U>({ url, method, data }: Params<T>) => {
       }
 
       setResponseData(result);
-    } catch (error) {
-      setError((error as { message: string }).message);
+    } catch (e) {
+      setError((e as { message: string }).message);
     } finally {
       setLoading(false);
     }

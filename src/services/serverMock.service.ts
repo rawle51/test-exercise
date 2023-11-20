@@ -1,11 +1,18 @@
 import { createServer, Response } from 'miragejs';
+
 import { LoginRequest } from './sdk.service';
 
-export const TOKEN_ITEM = 'token-item';
+const TOKEN_ITEM = 'token-item';
 export const EXAMPLE_URL = 'example.com';
 
 export function getAuthorized(): boolean {
   return Boolean(localStorage.getItem(TOKEN_ITEM));
+}
+
+function isValidLogin(loginRequest: LoginRequest): boolean {
+  return (
+    loginRequest.username === 'admin' && loginRequest.password === 'password'
+  );
 }
 
 export function server() {
@@ -24,9 +31,8 @@ export function server() {
           localStorage.setItem(TOKEN_ITEM, token);
 
           return new Response(200, {}, { token });
-        } else {
-          return new Response(401, {}, { error: 'Invalid credentials' });
         }
+        return new Response(401, {}, { error: 'Invalid credentials' });
       });
 
       this.delete('/login', () => {
@@ -79,7 +85,7 @@ export function server() {
         ];
       });
 
-      this.delete('/urls', (_, request) => {
+      this.delete('/urls', () => {
         if (!getAuthorized()) {
           return new Response(401, {}, { error: 'Unauthorized' });
         }
@@ -92,7 +98,7 @@ export function server() {
           return new Response(401, {}, { error: 'Unauthorized' });
         }
 
-        let id = request.params.urlUuid;
+        const id = request.params.urlUuid;
 
         if (id === '1') {
           return new Response(200, {}, { data: 'short-url.com' });
@@ -102,10 +108,4 @@ export function server() {
       });
     },
   });
-}
-
-function isValidLogin(loginRequest: LoginRequest): boolean {
-  return (
-    loginRequest.username === 'admin' && loginRequest.password === 'password'
-  );
 }

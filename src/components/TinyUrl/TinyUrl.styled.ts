@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Link, TextField } from '@mui/material';
+import { Link } from '@mui/material';
 
 export const StyledContainer = styled.div`
   position: relative;
@@ -20,24 +20,11 @@ export const StyledButton = styled(Link)`
   cursor: pointer;
 `;
 
-export const StyledForm = styled.form`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  gap: 32px;
-  height: 40px;
-`;
-
 export const StyledContent = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-start;
   min-height: 32px;
-`;
-
-export const StyledFiled = styled(TextField)`
-  width: 100%;
 `;
 
 export const StyledResult = styled.div`

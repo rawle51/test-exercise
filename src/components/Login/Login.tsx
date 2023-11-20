@@ -17,11 +17,13 @@ const initialState = { username: '', password: '' };
 export const Login = () => {
   const navigate = useNavigate();
   const [loginState, setState] = useState(initialState);
-  const { fetchData, loading, error, responseData } = useFetch<string, any>({
-    url: `/login`,
-    method: 'POST',
-    data: JSON.stringify(loginState),
-  });
+  const { fetchData, loading, error, responseData } = useFetch<string, unknown>(
+    {
+      url: `/login`,
+      method: 'POST',
+      data: JSON.stringify(loginState),
+    },
+  );
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

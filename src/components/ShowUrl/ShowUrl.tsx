@@ -4,7 +4,6 @@ import { Typography } from '@mui/material';
 
 import { Form } from '../Form/Form';
 import { Header } from '../Header/Header';
-import { UrlItem } from '../../services/sdk.service';
 import { useFetch } from '../../services/requestor.service';
 import { StyledButton, StyledContainer, StyledResult } from './ShowUrl.styled';
 
@@ -12,7 +11,7 @@ import { RoutePath } from '../../services/navigation.service';
 import { EXAMPLE_URL } from '../../services/serverMock.service';
 
 export const ShowUrl = () => {
-  const navidate = useNavigate();
+  const navigate = useNavigate();
   const [value, setValue] = useState('');
 
   const requestValue = value === EXAMPLE_URL ? 1 : 2;
@@ -28,8 +27,8 @@ export const ShowUrl = () => {
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setValue(value);
+    const { value: targetValue } = e.target;
+    setValue(targetValue);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -43,7 +42,7 @@ export const ShowUrl = () => {
       <Header />
 
       <div>
-        <StyledButton onClick={() => navidate(RoutePath.home)} variant="button">
+        <StyledButton onClick={() => navigate(RoutePath.home)} variant="button">
           <Typography variant="body2">View the urls list </Typography>
         </StyledButton>
       </div>

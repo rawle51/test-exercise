@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 import { useFetch } from '../../services/requestor.service';
 import { Header } from '../Header/Header';
@@ -12,11 +13,10 @@ import {
   StyledButtonWrapper,
 } from './UrlsList.styled';
 import { RoutePath } from '../../services/navigation.service';
-import { Typography } from '@mui/material';
 import { UrlItem } from '../../services/sdk.service';
 
 export const UrlsList = () => {
-  const navidate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     fetchData: getUrls,
@@ -61,13 +61,13 @@ export const UrlsList = () => {
 
       <StyledButtonWrapper>
         <StyledButton
-          onClick={() => navidate(RoutePath.createUrl)}
+          onClick={() => navigate(RoutePath.createUrl)}
           variant="button"
         >
           <Typography variant="body2">Create new url</Typography>
         </StyledButton>
         <StyledButton
-          onClick={() => navidate(RoutePath.showUrl)}
+          onClick={() => navigate(RoutePath.showUrl)}
           variant="button"
         >
           <Typography variant="body2">Find existing url</Typography>

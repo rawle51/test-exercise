@@ -1,0 +1,10 @@
+{
+  "ignores": [
+    "cspell",
+    "@types/node",
+    "@testing-library/react",
+    "@testing-library/user-event",
+    "@types/jest",
+    "web-vitals"
+  ]
+}

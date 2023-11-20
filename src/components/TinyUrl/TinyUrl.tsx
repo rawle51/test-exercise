@@ -1,6 +1,5 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneIcon from '@mui/icons-material/Done';
@@ -8,8 +7,6 @@ import DoneIcon from '@mui/icons-material/Done';
 import {
   StyledContainer,
   StyledContent,
-  StyledFiled,
-  StyledForm,
   StyledButton,
   StyledResult,
 } from './TinyUrl.styled';
@@ -34,8 +31,8 @@ export const TinyUrl = () => {
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setValue(value);
+    const { value: targetValue } = e.target;
+    setValue(targetValue);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -56,11 +53,12 @@ export const TinyUrl = () => {
   };
 
   useEffect(() => {
+    let timerId: NodeJS.Timeout;
     if (copyState) {
-      let timerId = setTimeout(() => setCopyState(false), 2000);
-
-      return () => clearTimeout(timerId);
+      timerId = setTimeout(() => setCopyState(false), 2000);
     }
+
+    return () => clearTimeout(timerId);
   }, [copyState]);
 
   return (
